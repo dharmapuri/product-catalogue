@@ -1,0 +1,2 @@
+#Here we can define all the pre deployment task like package,quality check, test case analysis, report publish,
+#docker image build, image pushing etc
