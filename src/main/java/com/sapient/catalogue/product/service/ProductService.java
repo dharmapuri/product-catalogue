@@ -1,5 +1,6 @@
 package com.sapient.catalogue.product.service;
 
+import com.sapient.catalogue.product.controller.ProductController;
 import com.sapient.catalogue.product.entity.Product;
 import com.sapient.catalogue.product.mapper.SourceToDestinationMapper;
 import com.sapient.catalogue.product.model.ProductModel;
@@ -13,9 +14,13 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +55,9 @@ public class ProductService {
     pagingResponse.setTotalNumberOfRecords(pagedProducts.getTotalElements());
     log.info("Total no of records: {}", pagedProducts.getTotalElements());
     productsResponse.setPagingResponse(pagingResponse);
+    Link plansLink = linkTo(methodOn(ProductController.class).getAllProducts(null)).withRel("get-products")
+            .expand().withType("GET");
+    productsResponse.add(plansLink);
     return productsResponse;
   }
 

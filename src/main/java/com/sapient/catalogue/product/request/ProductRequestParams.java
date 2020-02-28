@@ -8,10 +8,10 @@ import lombok.Data;
 @ApiModel
 public class ProductRequestParams {
   @ApiParam(value = "This parameter used to provide page number", allowableValues = "1")
-  private String page;
+  private String page ="0";
 
   @ApiParam(value = "This parameter used to provide no of records per page", allowableValues = "5")
-  private String pageSize;
+  private String pageSize ="5";
 
   @ApiParam(
       value = "This is optional parameter used to filter products by category",
